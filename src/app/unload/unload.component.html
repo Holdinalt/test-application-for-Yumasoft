@@ -1,9 +1,22 @@
 <div class="container">
   <form>
-    <label for="dataJSON">JSON</label>
-    <textarea class="form-control" id="dataJSON"
-              name="dataInput" [value]="passportsJSON">
+    <div class="form-group">
+      <label for="dataJSON">JSON</label>
+      <textarea class="form-control" id="dataJSON"
+                name="dataJSONOutput" [value]="passportsJSON">
     </textarea>
+
+      <button (click)="save(passportsJSON)">Download JSON</button>
+    </div>
+    <div class="form-group">
+      <label for="dataCSV">CSV</label>
+      <textarea class="form-control" id="dataCSV"
+                name="dataCSVOutput" [value]="passportsCSV">
+    </textarea>
+
+      <button (click)="save(passportsCSV)">Download CSV</button>
+    </div>
+
   </form>
 </div>
 
