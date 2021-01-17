@@ -3,15 +3,29 @@
   <div class="form-input">
     <form>
       <div class="form-group">
-        <label for="inputData">Info</label>
-        <input type="text" class="form-control"
-               id="inputData" aria-describedby="inputDataHelp"
-               name="dataInput" [(ngModel)]="inputLine"
-               placeholder='Example: [{"name":"Alex","year":"2000"}]'>
+        <label for="inputJSONData">Info in JSON</label>
+        <textarea class="form-control" id="inputJSONData" aria-describedby="inputDataHelp"
+                  name="dataJSONInput" [(ngModel)]="inputJSONLine"
+                  placeholder='Example: [{"name":"Alex","year":"2000"}]' >
 
-        <small id="inputDataHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small>
+        </textarea>
+
+        <small id="inputDataHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small><br>
+        <button type="submit" class="btn btn-primary" (click)="addJSONInfo()">Add Info</button>
       </div>
-      <button type="submit" class="btn btn-primary" (click)="addInfo()">Add Info</button>
+
+      <div class="form-group">
+        <label for="inputCSVData">Info in CSV</label>
+        <textarea class="form-control" id="inputCSVData" aria-describedby="inputDataCSVHelp"
+                  name="dataCSVInput" [(ngModel)]="inputCSVLine"
+                  placeholder='Example: [{"name":"Alex","year":"2000"}]' >
+
+        </textarea>
+
+        <small id="inputDataCSVHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small><br>
+        <button type="submit" class="btn btn-primary" (click)="addCSVInfo()">Add Info</button>
+      </div>
+
     </form>
   </div>
 </div>

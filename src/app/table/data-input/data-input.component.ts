@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Passport} from '../../models/Passport';
 import {PassportHandlerService} from '../../passport-handler.service';
+import * as CSV from 'csv-string';
 
 
 @Component({
@@ -15,7 +16,8 @@ export class DataInputComponent implements OnInit{
 
   passports: Passport[];
 
-  inputLine: string;
+  inputJSONLine: string;
+  inputCSVLine: string;
 
   constructor(private passportHandlerService: PassportHandlerService) {
   }
@@ -30,8 +32,19 @@ export class DataInputComponent implements OnInit{
   }
 
 
-  addInfo(): void{
-    const temp: Passport[] = JSON.parse(this.inputLine);
+  addJSONInfo(): void{
+    const temp: Passport[] = JSON.parse(this.inputJSONLine);
+    this.addInfo(temp);
+  }
+
+  addCSVInfo(): void{
+    CSV.detect(this.inputCSVLine);
+    console.log(CSV.parse(this.inputCSVLine));
+    // const temp: Passport[] = CSV.parse(this.inputJSONLine, ',');
+    // this.addInfo(temp);
+  }
+
+  addInfo(temp: Passport[]): void{
     if (this.passports == null){
       this.setPassports(temp);
     } else{
@@ -58,7 +71,7 @@ export class DataInputComponent implements OnInit{
   }
 
   addToPassports(passports: Passport[]): void{
-    for (let passport: Passport of passports){
+    for (let passport of passports){
       console.log(passport.name);
       this.passports.push(passport);
     }

@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Passport} from '../../models/Passport';
 import {PassportHandlerService} from '../../passport-handler.service';
 
@@ -9,6 +9,8 @@ import {PassportHandlerService} from '../../passport-handler.service';
 })
 
 export class EditTableComponent implements OnInit{
+
+  passports: Passport[];
 
   constructor(private passportHandlerService: PassportHandlerService) {
   }
@@ -21,10 +23,19 @@ export class EditTableComponent implements OnInit{
     this.passportHandlerService.sendMessage(this.passports);
   }
 
-  passports: Passport[] = [new Passport('dan', 2000)];
-
   deleteRow(id: number): void{
     this.passports.splice(id, 1);
-    this.sendPassports()
+    this.sendPassports();
+  }
+
+  addRow(): void{
+    const temp = new Passport('xxx', 0);
+    if (this.passports == null){
+      this.passports = [temp];
+    } else{
+      this.passports.push(temp);
+    }
+
+    this.sendPassports();
   }
 }

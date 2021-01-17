@@ -9,12 +9,6 @@
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <th scope="row">#</th>
-          <td>C</td>
-          <td>17.5%</td>
-          <td></td>
-        </tr>
         <tr *ngFor="let passport of passports; let i = index">
           <th scope="row">{{i+1}}</th>
           <td><input type="text" class="form-control"
@@ -29,6 +23,14 @@
           <td><button type="button" class="btn btn-primary"
                       (click)="deleteRow(i)">Delete</button>
           </td>
+        </tr>
+
+        <tr>
+          <td>
+            <button type="button" class="btn btn-primary"
+                    (click)="addRow()">+</button>
+          </td>
+          <td colspan="3"></td>
         </tr>
 
         <!--<app-edit-table-table-row
