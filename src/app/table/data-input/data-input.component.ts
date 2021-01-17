@@ -1,8 +1,6 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Passport} from '../../models/Passport';
 import {PassportHandlerService} from '../../passport-handler.service';
-import * as CSV from 'csv-string';
-
 
 @Component({
   selector: 'app-table-data-input',
@@ -18,6 +16,8 @@ export class DataInputComponent implements OnInit{
 
   inputJSONLine: string;
   inputCSVLine: string;
+
+  JSONUploadFile: File = null;
 
   constructor(private passportHandlerService: PassportHandlerService) {
   }
@@ -38,8 +38,8 @@ export class DataInputComponent implements OnInit{
   }
 
   addCSVInfo(): void{
-    CSV.detect(this.inputCSVLine);
-    console.log(CSV.parse(this.inputCSVLine));
+    /*const CSV = require('csv-string');
+    console.log(CSV.parse('a,b,c\na,b,c'));*/
     // const temp: Passport[] = CSV.parse(this.inputJSONLine, ',');
     // this.addInfo(temp);
   }
@@ -60,13 +60,13 @@ export class DataInputComponent implements OnInit{
 
 
   showError(): void {
-    const inputRef = document.getElementById('inputData');
+    const inputRef = document.getElementById('inputJSONData');
     inputRef.classList.add('alert', 'alert-danger');
 
   }
 
   hideError(): void {
-    const inputRef = document.getElementById('inputData');
+    const inputRef = document.getElementById('inputJSONData');
     inputRef.classList.remove('alert', 'alert-danger');
   }
 
@@ -83,6 +83,17 @@ export class DataInputComponent implements OnInit{
     this.passports = passports;
     this.sendPassports();
     this.passportChange.emit(this.passports);
+  }
+
+  inputJSONFile(files: FileList): void {
+    this.JSONUploadFile = files.item(0);
+    const reader = new FileReader();
+    reader.onload = () => {
+      console.log(reader.result);
+      const temp: Passport[] = JSON.parse(reader.result.toString());
+      this.addInfo(temp);
+    };
+    reader.readAsText(this.JSONUploadFile);
   }
 
 }

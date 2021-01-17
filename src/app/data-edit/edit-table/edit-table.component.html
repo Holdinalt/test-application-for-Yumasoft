@@ -20,8 +20,13 @@
                      id="yearField{{i}}"
                      name="yearField" [(ngModel)]="passports[i].year"
                      placeholder='{{passport.year}}' (change)="sendPassports()"></td>
-          <td><button type="button" class="btn btn-primary"
+          <td>
+            <button type="button" class="btn btn-primary"
                       (click)="deleteRow(i)">Delete</button>
+            <button type="button" class="btn btn-primary"
+                    (click)="upRow(i)">/\</button>
+            <button type="button" class="btn btn-primary"
+                    (click)="downRow(i)">\/</button>
           </td>
         </tr>
 

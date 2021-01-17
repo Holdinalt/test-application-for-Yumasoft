@@ -38,4 +38,28 @@ export class EditTableComponent implements OnInit{
 
     this.sendPassports();
   }
+
+  upRow(index: number): void{
+    if (index === 0){
+      return;
+    }
+
+    const temp: Passport = this.passports[index];
+    this.passports.splice(index, 1);
+    this.passports.splice(index - 1, 0, temp);
+    this.sendPassports();
+
+  }
+
+  downRow(index: number): void{
+    if (index === this.passports.length){
+      return;
+    }
+
+    const temp: Passport = this.passports[index];
+    this.passports.splice(index, 1);
+    this.passports.splice(index + 1, 0, temp);
+    this.sendPassports();
+
+  }
 }
