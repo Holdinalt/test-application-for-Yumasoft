@@ -5,7 +5,7 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable()
 export class PassportHandlerService {
 
-  private messageSource = new BehaviorSubject<Passport[]>([new Passport('1', 1)]);
+  private messageSource = new BehaviorSubject<Passport[]>(null);
   currentMessage = this.messageSource.asObservable();
 
   constructor() { }

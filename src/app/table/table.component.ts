@@ -9,5 +9,7 @@ import {Passport} from '../models/Passport';
 })
 export class TableComponent {
 
+  passports: Passport[];
+
 
 }

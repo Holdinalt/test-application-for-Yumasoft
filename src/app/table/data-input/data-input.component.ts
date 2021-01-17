@@ -1,7 +1,6 @@
-import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Passport} from '../../models/Passport';
 import {PassportHandlerService} from '../../passport-handler.service';
-import {emit} from 'cluster';
 
 
 @Component({
@@ -14,7 +13,7 @@ export class DataInputComponent implements OnInit{
 
   @Output() passportChange = new EventEmitter<Passport[]>();
 
-  passports: Passport[] = [];
+  passports: Passport[];
 
   inputLine: string;
 
@@ -23,6 +22,7 @@ export class DataInputComponent implements OnInit{
 
   ngOnInit(): void {
     this.passportHandlerService.currentMessage.subscribe(passports =>  this.passports = passports);
+    this.passportChange.emit(this.passports);
   }
 
   sendPassports(): void{
@@ -31,11 +31,15 @@ export class DataInputComponent implements OnInit{
 
 
   addInfo(): void{
-    console.log(this.inputLine);
-
+    const temp: Passport[] = JSON.parse(this.inputLine);
+    if (this.passports == null){
+      this.setPassports(temp);
+    } else{
+      this.addToPassports(temp);
+    }
+    this.hideError();
     try{
-      this.addToPassports(JSON.parse(this.inputLine));
-      this.hideError();
+
     } catch (e){
       this.showError();
     }
@@ -54,9 +58,16 @@ export class DataInputComponent implements OnInit{
   }
 
   addToPassports(passports: Passport[]): void{
-    for (let passport of passports){
+    for (let passport: Passport of passports){
+      console.log(passport.name);
       this.passports.push(passport);
     }
+    this.sendPassports();
+    this.passportChange.emit(this.passports);
+  }
+
+  setPassports(passports: Passport[]): void{
+    this.passports = passports;
     this.sendPassports();
     this.passportChange.emit(this.passports);
   }
