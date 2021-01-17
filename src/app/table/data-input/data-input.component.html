@@ -1,0 +1,18 @@
+<br>
+<div class="container col-lg-12" >
+  <div class="form-input">
+    <form>
+      <div class="form-group">
+        <label for="inputData">Info</label>
+        <input type="text" class="form-control"
+               id="inputData" aria-describedby="inputDataHelp"
+               name="dataInput" [(ngModel)]="inputLine"
+               placeholder='Example: [{"name":"Alex","year":"2000"}]'>
+
+        <small id="inputDataHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small>
+      </div>
+      <button type="submit" class="btn btn-primary" (click)="addInfo()">Add Info</button>
+    </form>
+  </div>
+</div>
+<br>
