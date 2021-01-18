@@ -18,4 +18,13 @@ export class Passport{
     }
     return out;
   }
+
+  parseToCSV(passports: Passport[], separator: string): string{
+    let out = 'Name' + separator + 'Year' + '\n';
+    for (let passport of passports){
+        out += passport.name + separator + passport.year + '\n';
+    }
+    console.log(out);
+    return out;
+  }
 }

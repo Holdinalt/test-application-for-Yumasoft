@@ -24,7 +24,6 @@
     "csv-string": "^4.0.1",
     "file-saver": "^2.0.5",
     "jquery": "^3.5.1",
-    "ngx-csv-parser": "0.0.6",
     "rxjs": "~6.6.0",
     "stream": "0.0.2",
     "tslib": "^2.0.0",
