@@ -12,7 +12,6 @@
         <tr *ngFor="let passport of this.passportsWrap.getPassports(); let i = index">
           <th scope="row">{{i+1}}</th>
           <td><input type="text" class="form-control"
-                     id="nameField"
                      name="nameField{{i}}" [(ngModel)]="this.passportsWrap.getPassports()[i].name"
                      placeholder='{{passport.name}}' (change)="sendPassports()">
           </td>

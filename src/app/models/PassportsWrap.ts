@@ -50,11 +50,11 @@ export class PassportsWrap{
   }
 
   getPassportsCSV(separator: string): string{
-    let out = 'Name' + separator + 'Year' + '\n';
+    let out = 'Name' + separator + 'Year';
     for (const passport of this.passports){
-      out += passport.name + separator + passport.year + '\n';
+      out += '\n' + passport.name + separator + passport.year;
     }
-    console.log(out);
+    // console.log(out);
     return out;
   }
 

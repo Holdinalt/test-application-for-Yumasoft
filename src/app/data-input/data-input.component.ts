@@ -1,5 +1,4 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
-import {Passport} from '../models/Passport';
+import {Component, OnInit} from '@angular/core';
 import {PassportHandlerService} from '../passport-handler.service';
 import {PassportsWrap} from '../models/PassportsWrap';
 
@@ -17,6 +16,7 @@ export class DataInputComponent implements OnInit{
   inputCSVLine: string;
 
   JSONUploadFile: File = null;
+  CSVUploadFile: File = null;
 
   constructor(private passportHandlerService: PassportHandlerService) {
   }
@@ -31,23 +31,25 @@ export class DataInputComponent implements OnInit{
 
 
   addJSONInfo(): void{
-    this.passportsWrap.addPassportsFromJSON(this.inputJSONLine); //TODO
-    try{
 
+    try{
+      this.passportsWrap.addPassportsFromJSON(this.inputJSONLine);
       this.hideError();
     } catch (e){
       this.showError();
     }
+    this.sendPassports();
   }
 
   addCSVInfo(separator: string): void{
-    this.passportsWrap.addPassportsFromCSV(this.inputCSVLine, separator); //TODO
-    try{
 
+    try{
+      this.passportsWrap.addPassportsFromCSV(this.inputCSVLine, separator);
       this.hideError();
     } catch (e){
       this.showError();
     }
+    this.sendPassports();
   }
 
   showError(): void {
@@ -69,9 +71,23 @@ export class DataInputComponent implements OnInit{
     reader.onload = () => {
       console.log(reader.result);
       this.passportsWrap.addPassportsFromJSON(reader.result.toString());
+      this.sendPassports();
     };
 
     reader.readAsText(this.JSONUploadFile);
+  }
+
+  inputCSVFile(files: FileList): void {
+    this.CSVUploadFile = files.item(0);
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      console.log(reader.result);
+      this.passportsWrap.addPassportsFromCSV(reader.result.toString(), ',');
+      this.sendPassports();
+    };
+
+    reader.readAsText(this.CSVUploadFile);
   }
 
 }
