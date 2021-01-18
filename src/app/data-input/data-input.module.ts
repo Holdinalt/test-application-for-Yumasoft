@@ -2,8 +2,8 @@ import {NgModule} from '@angular/core';
 import {DataInputComponent} from './data-input.component';
 
 import {FormsModule} from '@angular/forms';
-import {PassportHandlerService} from '../../passport-handler.service';
-import {NgxCsvParserModule} from "ngx-csv-parser";
+import {PassportHandlerService} from '../passport-handler.service';
+import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
   declarations: [DataInputComponent],
@@ -11,7 +11,7 @@ import {NgxCsvParserModule} from "ngx-csv-parser";
     DataInputComponent
   ],
 
-  imports: [FormsModule],
+    imports: [FormsModule, BrowserModule],
   providers: [PassportHandlerService]
 })
 

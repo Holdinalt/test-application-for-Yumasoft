@@ -1,11 +1,11 @@
 import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
 import {NgModule} from '@angular/core';
-import {TableComponent} from './table/table.component';
 import {UnloadComponent} from './unload/unload.component';
 import {EditTableComponent} from './edit-table/edit-table.component';
+import {DataInputComponent} from './data-input/data-input.component';
 
 const routes: Routes = [
-  {path: '', component: TableComponent},
+  {path: '', component: DataInputComponent},
   {path: 'data-edit', component: EditTableComponent},
   {path: 'unload', component: UnloadComponent}
 ];
