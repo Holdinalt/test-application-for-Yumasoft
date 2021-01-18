@@ -5,7 +5,8 @@ import { AppComponent } from './app.component';
 import {TableModule} from './table/table.module';
 import {AppRoutingModule} from './app-routing.module';
 import {HeaderComponent} from './layout/header.component';
-import {DataEditModule} from './data-edit/data-edit.module';
+import {EditTableModule} from './edit-table/edit-table.module';
+import {UnloadModule} from './unload/unload.module';
 
 
 @NgModule({
@@ -17,7 +18,8 @@ import {DataEditModule} from './data-edit/data-edit.module';
     BrowserModule,
     AppRoutingModule,
     TableModule,
-    DataEditModule
+    EditTableModule,
+    UnloadModule
   ],
   providers: [],
   bootstrap: [AppComponent]

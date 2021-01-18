@@ -1,10 +1,8 @@
-import {NgModule} from "@angular/core";
-import {FormsModule} from "@angular/forms";
-import {BrowserModule} from "@angular/platform-browser";
-import {EditTableComponent} from "../data-edit/edit-table/edit-table.component";
-import {EditTableRowComponent} from "../data-edit/edit-table/edit-table-row.component";
-import {PassportHandlerService} from "../passport-handler.service";
-import {UnloadComponent} from "./unload.component";
+import {NgModule} from '@angular/core';
+import {FormsModule} from '@angular/forms';
+import {BrowserModule} from '@angular/platform-browser';
+import {PassportHandlerService} from '../passport-handler.service';
+import {UnloadComponent} from './unload.component';
 
 @NgModule({
   imports: [FormsModule, BrowserModule],
@@ -15,4 +13,4 @@ import {UnloadComponent} from "./unload.component";
   providers: [PassportHandlerService]
 })
 
-export class EditTableModule {}
+export class UnloadModule {}

@@ -1,10 +1,10 @@
 import {Component, OnInit} from '@angular/core';
-import {Passport} from '../../models/Passport';
-import {PassportHandlerService} from '../../passport-handler.service';
+import {Passport} from '../models/Passport';
+import {PassportHandlerService} from '../passport-handler.service';
 
 
 @Component({
-  selector: 'app-edit-table-table',
+  selector: 'app-edit-table',
   templateUrl: 'edit-table.component.html'
 })
 
