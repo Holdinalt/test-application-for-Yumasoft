@@ -27,4 +27,21 @@ export class Passport{
     console.log(out);
     return out;
   }
+
+  parseFromCSV(csv: string, separator: string): Passport[]{
+    console.log(csv);
+    const rawRows = csv.split('\n');
+    let passports: Passport[] = null;
+    for (let rows of rawRows){
+      if (passports === null){
+        passports = [new Passport(rows.split(separator)[0], Number(rows.split(separator)[1]))];
+      }else {
+        passports.push(new Passport(rows.split(separator)[0], Number(rows.split(separator)[1])));
+      }
+      if (passports[0].name === 'Name'){
+        passports.splice(0, 1);
+      }
+    }
+    return passports;
+  }
 }

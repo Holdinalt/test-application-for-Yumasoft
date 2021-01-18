@@ -38,10 +38,9 @@ export class DataInputComponent implements OnInit{
   }
 
   addCSVInfo(): void{
-    /*const CSV = require('csv-string');
-    console.log(CSV.parse('a,b,c\na,b,c'));*/
-    // const temp: Passport[] = CSV.parse(this.inputJSONLine, ',');
-    // this.addInfo(temp);
+    const parse = new Passport('1', 1);
+    const temp: Passport[] = parse.parseFromCSV(this.inputCSVLine, ',');
+    this.addInfo(temp);
   }
 
   addInfo(temp: Passport[]): void{

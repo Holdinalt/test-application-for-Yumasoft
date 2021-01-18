@@ -23,12 +23,14 @@ export class UnloadComponent implements OnInit{
 
   ngOnInit(): void {
     this.passportHandlerService.currentMessage.subscribe(passports =>  this.passports = passports);
+    console.log(this.passports);
     if (this.passports == null){
       this.passportsJSON = '[]';
       this.passportsCSV = '';
     } else {
+      const parser = new Passport('0', 0);
       this.passportsJSON = JSON.stringify(this.passports);
-      this.passportsCSV = this.passports[0].parseToCSV(this.passports, ',');
+      this.passportsCSV = parser.parseToCSV(this.passports, ',');
     }
   }
 

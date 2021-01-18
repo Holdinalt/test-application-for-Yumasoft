@@ -6,7 +6,7 @@
         <label for="inputJSONData">Info in JSON</label>
         <textarea class="form-control" id="inputJSONData" aria-describedby="inputDataJSONHelp"
                   name="dataJSONInput" [(ngModel)]="inputJSONLine"
-                  placeholder='Example: [{"name":"Alex","year":"2000"}]' >
+                  placeholder='Example:&#10;[{"name":"Alex","year":"2000"}]' >
 
         </textarea>
 
@@ -23,7 +23,7 @@
         <label for="inputCSVData">Info in CSV</label>
         <textarea class="form-control" id="inputCSVData" aria-describedby="inputDataCSVHelp"
                   name="dataCSVInput" [(ngModel)]="inputCSVLine"
-                  placeholder='Example: [{"name":"Alex","year":"2000"}]' >
+                  placeholder='Example:&#10;Name,Year&#10;dan,2000' >
 
         </textarea>
         <small id="inputDataCSVHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small><br>
