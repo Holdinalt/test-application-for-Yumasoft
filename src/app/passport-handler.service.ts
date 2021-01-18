@@ -16,4 +16,16 @@ export class PassportHandlerService {
     sessionStorage.setItem('passports',  JSON.stringify(new_passports));
   }
 
+  getPassports(): Passport[]{
+    if ( sessionStorage.getItem('passports') === ''){
+      return [];
+    }
+    console.log(JSON.parse(sessionStorage.getItem('passports')));
+    return JSON.parse(sessionStorage.getItem('passports'));
+  }
+
+  setPassports(passports: Passport[]): void{
+    sessionStorage.setItem('passports',  JSON.stringify(passports));
+  }
+
 }

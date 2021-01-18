@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {PassportHandlerService} from '../passport-handler.service';
 import {Passport} from '../models/Passport';
 import { saveAs } from 'file-saver';
+import {PassportsWrap} from '../models/PassportsWrap';
 
 
 
@@ -14,6 +15,8 @@ import { saveAs } from 'file-saver';
 export class UnloadComponent implements OnInit{
 
   passports: Passport[];
+
+  passportsWrap: PassportsWrap = new PassportsWrap();
 
   passportsJSON: string;
   passportsCSV: string;
@@ -28,9 +31,9 @@ export class UnloadComponent implements OnInit{
       this.passportsJSON = '[]';
       this.passportsCSV = '';
     } else {
-      const parser = new Passport('0', 0);
+      this.passportsWrap.setPassports(this.passports);
       this.passportsJSON = JSON.stringify(this.passports);
-      this.passportsCSV = parser.parseToCSV(this.passports, ',');
+      this.passportsCSV = this.passportsWrap.getPassportsCSV(',');
     }
   }
 

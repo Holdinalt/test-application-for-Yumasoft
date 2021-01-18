@@ -28,7 +28,7 @@
         </textarea>
         <small id="inputDataCSVHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small><br>
 
-        <button type="submit" class="btn btn-primary" (click)="addCSVInfo()">Add Info</button>
+        <button type="submit" class="btn btn-primary" (click)="addCSVInfo(',')">Add Info</button>
       </div>
 
     </form>
@@ -45,7 +45,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let passport of passports; let i = index">
+    <tr *ngFor="let passport of passportsWrap.getPassports(); let i = index">
       <th scope="row">{{i+1}}</th>
       <td>{{passport.name}}</td>
       <td>{{passport.year}}</td>

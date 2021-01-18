@@ -1,6 +1,7 @@
 import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {Passport} from '../models/Passport';
 import {PassportHandlerService} from '../passport-handler.service';
+import {PassportsWrap} from '../models/PassportsWrap';
 
 @Component({
   selector: 'app-table-data-input',
@@ -10,9 +11,7 @@ import {PassportHandlerService} from '../passport-handler.service';
 
 export class DataInputComponent implements OnInit{
 
-  @Output() passportChange = new EventEmitter<Passport[]>();
-
-  passports: Passport[];
+  passportsWrap: PassportsWrap = new PassportsWrap();
 
   inputJSONLine: string;
   inputCSVLine: string;
@@ -23,40 +22,33 @@ export class DataInputComponent implements OnInit{
   }
 
   ngOnInit(): void {
-    this.passportHandlerService.currentMessage.subscribe(passports =>  this.passports = passports);
-    this.passportChange.emit(this.passports);
+    this.passportsWrap.setPassports(this.passportHandlerService.getPassports());
   }
 
   sendPassports(): void{
-    this.passportHandlerService.sendMessage(this.passports);
+    this.passportHandlerService.setPassports(this.passportsWrap.getPassports());
   }
 
 
   addJSONInfo(): void{
-    const temp: Passport[] = JSON.parse(this.inputJSONLine);
-    this.addInfo(temp);
-  }
-
-  addCSVInfo(): void{
-    const parse = new Passport('1', 1);
-    const temp: Passport[] = parse.parseFromCSV(this.inputCSVLine, ',');
-    this.addInfo(temp);
-  }
-
-  addInfo(temp: Passport[]): void{
-    if (this.passports == null){
-      this.setPassports(temp);
-    } else{
-      this.addToPassports(temp);
-    }
-    this.hideError();
+    this.passportsWrap.addPassportsFromJSON(this.inputJSONLine); //TODO
     try{
 
+      this.hideError();
     } catch (e){
       this.showError();
     }
   }
 
+  addCSVInfo(separator: string): void{
+    this.passportsWrap.addPassportsFromCSV(this.inputCSVLine, separator); //TODO
+    try{
+
+      this.hideError();
+    } catch (e){
+      this.showError();
+    }
+  }
 
   showError(): void {
     const inputRef = document.getElementById('inputJSONData');
@@ -69,29 +61,16 @@ export class DataInputComponent implements OnInit{
     inputRef.classList.remove('alert', 'alert-danger');
   }
 
-  addToPassports(passports: Passport[]): void{
-    for (let passport of passports){
-      console.log(passport.name);
-      this.passports.push(passport);
-    }
-    this.sendPassports();
-    this.passportChange.emit(this.passports);
-  }
-
-  setPassports(passports: Passport[]): void{
-    this.passports = passports;
-    this.sendPassports();
-    this.passportChange.emit(this.passports);
-  }
 
   inputJSONFile(files: FileList): void {
     this.JSONUploadFile = files.item(0);
     const reader = new FileReader();
+
     reader.onload = () => {
       console.log(reader.result);
-      const temp: Passport[] = JSON.parse(reader.result.toString());
-      this.addInfo(temp);
+      this.passportsWrap.addPassportsFromJSON(reader.result.toString());
     };
+
     reader.readAsText(this.JSONUploadFile);
   }
 

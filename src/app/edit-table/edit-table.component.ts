@@ -21,6 +21,7 @@ export class EditTableComponent implements OnInit{
 
   sendPassports(): void{
     this.passportHandlerService.sendMessage(this.passports);
+    this.passportHandlerService.setPassports(this.passports);
   }
 
   deleteRow(id: number): void{
