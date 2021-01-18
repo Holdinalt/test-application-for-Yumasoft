@@ -20,9 +20,13 @@ export class PassportsWrap{
     if (this.passports == null){
       this.passports = [];
     }
-    for (let passport of passports){
+    for (const passport of passports){
       this.passports.push(passport);
     }
+  }
+
+  deletePassport(index: number): void{
+    this.passports.splice(index, 1);
   }
 
   addPassportsFromJSON(json: string): void{
@@ -32,7 +36,7 @@ export class PassportsWrap{
   addPassportsFromCSV(csv: string, separator: string): void{
     const rawRows = csv.split('\n');
     let passports: Passport[] = null;
-    for (let rows of rawRows){
+    for (const rows of rawRows){
       if (passports === null){
         passports = [new Passport(rows.split(separator)[0], Number(rows.split(separator)[1]))];
       }else {
@@ -47,7 +51,7 @@ export class PassportsWrap{
 
   getPassportsCSV(separator: string): string{
     let out = 'Name' + separator + 'Year' + '\n';
-    for (let passport of this.passports){
+    for (const passport of this.passports){
       out += passport.name + separator + passport.year + '\n';
     }
     console.log(out);

@@ -9,16 +9,16 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let passport of passports; let i = index">
+        <tr *ngFor="let passport of this.passportsWrap.getPassports(); let i = index">
           <th scope="row">{{i+1}}</th>
           <td><input type="text" class="form-control"
                      id="nameField"
-                     name="nameField{{i}}" [(ngModel)]="passports[i].name"
+                     name="nameField{{i}}" [(ngModel)]="this.passportsWrap.getPassports()[i].name"
                      placeholder='{{passport.name}}' (change)="sendPassports()">
           </td>
           <td><input type="text" class="form-control"
                      id="yearField{{i}}"
-                     name="yearField" [(ngModel)]="passports[i].year"
+                     name="yearField" [(ngModel)]="this.passportsWrap.getPassports()[i].year"
                      placeholder='{{passport.year}}' (change)="sendPassports()"></td>
           <td>
             <button type="button" class="btn btn-primary"
@@ -38,11 +38,6 @@
           <td colspan="3"></td>
         </tr>
 
-        <!--<app-edit-table-table-row
-          *ngFor="let passport of passports; let i = index"
-          [passport]="passport"
-          (delete)="onDeleteRow(i)">
-        </app-edit-table-table-row>-->
         </tbody>
       </table>
 

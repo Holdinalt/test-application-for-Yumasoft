@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Passport} from '../models/Passport';
 import {PassportHandlerService} from '../passport-handler.service';
+import {PassportsWrap} from '../models/PassportsWrap';
 
 
 @Component({
@@ -10,33 +11,26 @@ import {PassportHandlerService} from '../passport-handler.service';
 
 export class EditTableComponent implements OnInit{
 
-  passports: Passport[];
+  passportsWrap: PassportsWrap = new PassportsWrap();
 
   constructor(private passportHandlerService: PassportHandlerService) {
   }
 
   ngOnInit(): void {
-    this.passportHandlerService.currentMessage.subscribe(passports =>  this.passports = passports);
+    this.passportsWrap.setPassports(this.passportHandlerService.getPassports());
   }
 
   sendPassports(): void{
-    this.passportHandlerService.sendMessage(this.passports);
-    this.passportHandlerService.setPassports(this.passports);
+    this.passportHandlerService.setPassports(this.passportsWrap.getPassports());
   }
 
   deleteRow(id: number): void{
-    this.passports.splice(id, 1);
+    this.passportsWrap.deletePassport(id);
     this.sendPassports();
   }
 
   addRow(): void{
-    const temp = new Passport('xxx', 0);
-    if (this.passports == null){
-      this.passports = [temp];
-    } else{
-      this.passports.push(temp);
-    }
-
+    this.passportsWrap.addPassports([new Passport('xxx', 0)]);
     this.sendPassports();
   }
 
@@ -45,21 +39,25 @@ export class EditTableComponent implements OnInit{
       return;
     }
 
-    const temp: Passport = this.passports[index];
-    this.passports.splice(index, 1);
-    this.passports.splice(index - 1, 0, temp);
+    const newPassports = this.passportsWrap.getPassports();
+    const tempPassport: Passport = this.passportsWrap.getPassports()[index];
+    newPassports.splice(index, 1);
+    newPassports.splice(index - 1, 0, tempPassport);
+    this.passportsWrap.setPassports(newPassports);
     this.sendPassports();
-
   }
 
+
   downRow(index: number): void{
-    if (index === this.passports.length){
+    if (index === this.passportsWrap.getPassports().length){
       return;
     }
 
-    const temp: Passport = this.passports[index];
-    this.passports.splice(index, 1);
-    this.passports.splice(index + 1, 0, temp);
+    const newPassports = this.passportsWrap.getPassports();
+    const tempPassport: Passport = this.passportsWrap.getPassports()[index];
+    newPassports.splice(index, 1);
+    newPassports.splice(index + 1, 0, tempPassport);
+    this.passportsWrap.setPassports(newPassports);
     this.sendPassports();
 
   }
