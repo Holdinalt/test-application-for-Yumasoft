@@ -1,3 +1,19 @@
 .container{
   width: 100%;
 }
+
+textarea{
+  height: 5.5rem;
+}
+
+.form-group{
+  padding: 1rem;
+}
+
+@media screen and (max-width: 992px) {
+  .file-input{
+    padding: 1rem;
+  }
+}
+
+

@@ -1,0 +1,13 @@
+textarea{
+  height: 12rem;
+}
+
+.form-group{
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+}
+
+.downloadButton{
+  margin: 0.5rem;
+}

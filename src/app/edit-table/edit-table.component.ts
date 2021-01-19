@@ -6,7 +6,8 @@ import {PassportsWrap} from '../models/PassportsWrap';
 
 @Component({
   selector: 'app-edit-table',
-  templateUrl: 'edit-table.component.html'
+  templateUrl: 'edit-table.component.html',
+  styleUrls: ['edit-table.component.css']
 })
 
 export class EditTableComponent implements OnInit{

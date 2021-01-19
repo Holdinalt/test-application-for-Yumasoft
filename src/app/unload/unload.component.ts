@@ -8,7 +8,8 @@ import {PassportsWrap} from '../models/PassportsWrap';
 
 @Component({
   selector: 'app-unload',
-  templateUrl: 'unload.component.html'
+  templateUrl: 'unload.component.html',
+  styleUrls: ['unload.component.css']
 })
 
 export class UnloadComponent implements OnInit{

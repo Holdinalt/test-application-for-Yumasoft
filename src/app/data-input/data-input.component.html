@@ -1,22 +1,33 @@
 
-<div class="container col-lg-12" >
+<div class="container col-lg-10" >
   <div class="form-input">
-    <form>
+    <form class="form-horizontal">
       <div class="form-group">
         <label for="inputJSONData">Info in JSON</label>
-        <textarea class="form-control" id="inputJSONData" aria-describedby="inputDataJSONHelp"
+        <textarea class="form-control " id="inputJSONData" aria-describedby="inputDataJSONHelp"
                   name="dataJSONInput" [(ngModel)]="inputJSONLine"
                   placeholder='Example:&#10;[{"name":"Alex","year":"2000"}]' >
 
         </textarea>
 
         <small id="inputDataJSONHelp" class="form-text text-muted">Enter JSON information here to be added to the table.</small><br>
-        <button type="submit" class="btn btn-primary" (click)="addJSONInfo()">Add Info</button>
 
-        <label for="fileJSON">Choose JSON File</label>
-        <input type="file"
-               id="fileJSON"
-               (change)="inputJSONFile($event.target.files)">
+        <div class="row col-sm-11">
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary" (click)="addJSONInfo()">Add Info</button>
+          </div>
+
+          <div class="col-sm-4 row file-input">
+            <div class="col-sm-auto">
+              <label for="fileJSON">Choose JSON File</label>
+            </div>
+            <div class="col-sm-3">
+              <input type="file"
+                     id="fileJSON"
+                     (change)="inputJSONFile($event.target.files)">
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="form-group">
@@ -28,19 +39,27 @@
         </textarea>
         <small id="inputDataCSVHelp" class="form-text text-muted">Enter CSV information here to be added to the table.</small><br>
 
-        <button type="submit" class="btn btn-primary" (click)="addCSVInfo(',')">Add Info</button>
+        <div class="row col-sm-11">
+          <div class="col-sm-2">
+            <button type="submit" class="btn btn-primary" (click)="addCSVInfo(',')">Add Info</button>
+          </div>
 
-        <label for="fileCSV">Choose CSV File</label>
-        <input type="file"
-               id="fileCSV"
-               (change)="inputCSVFile($event.target.files)">
+          <div class="col-sm-4 row file-input">
+            <div class="col-sm-auto">
+              <label for="fileCSV">Choose CSV File </label>
+            </div>
+            <div class="col-sm-3">
+              <input type="file"
+                     id="fileCSV"
+                     (change)="inputCSVFile($event.target.files)">
+            </div>
+          </div>
+        </div>
       </div>
 
     </form>
   </div>
-</div>
 
-<div class="col-md-12">
   <table class="table" id="dataTable">
     <thead>
     <tr>
@@ -57,5 +76,8 @@
     </tr>
     </tbody>
   </table>
+
 </div>
-<br>
+
+
+
