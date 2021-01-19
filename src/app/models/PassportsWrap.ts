@@ -37,10 +37,13 @@ export class PassportsWrap{
     const rawRows = csv.split('\n');
     let passports: Passport[] = null;
     for (const rows of rawRows){
+      // if (isNaN(Number(rows.split(separator)[1])) || isNaN(Number(rows.split(separator)[0]))){
+      //   throw new Error('Parsing Exception');
+      // }
       if (passports === null){
-        passports = [new Passport(rows.split(separator)[0], Number(rows.split(separator)[1]))];
+        passports = [new Passport(rows.split(separator)[0], rows.split(separator)[1])];
       }else {
-        passports.push(new Passport(rows.split(separator)[0], Number(rows.split(separator)[1])));
+        passports.push(new Passport(rows.split(separator)[0], rows.split(separator)[1]));
       }
       if (passports[0].name === 'Name'){
         passports.splice(0, 1);

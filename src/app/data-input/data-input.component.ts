@@ -34,9 +34,9 @@ export class DataInputComponent implements OnInit{
 
     try{
       this.passportsWrap.addPassportsFromJSON(this.inputJSONLine);
-      this.hideError();
+      this.hideError('inputJSONData');
     } catch (e){
-      this.showError();
+      this.showError('inputJSONData');
     }
     this.sendPassports();
   }
@@ -45,21 +45,21 @@ export class DataInputComponent implements OnInit{
 
     try{
       this.passportsWrap.addPassportsFromCSV(this.inputCSVLine, separator);
-      this.hideError();
+      this.hideError('inputCSVData');
     } catch (e){
-      this.showError();
+      this.showError('inputCSVData');
     }
     this.sendPassports();
   }
 
-  showError(): void {
-    const inputRef = document.getElementById('inputJSONData');
+  showError(target: string): void {
+    const inputRef = document.getElementById(target);
     inputRef.classList.add('alert', 'alert-danger');
 
   }
 
-  hideError(): void {
-    const inputRef = document.getElementById('inputJSONData');
+  hideError(target: string): void {
+    const inputRef = document.getElementById(target);
     inputRef.classList.remove('alert', 'alert-danger');
   }
 

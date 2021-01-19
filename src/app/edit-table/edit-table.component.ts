@@ -31,7 +31,7 @@ export class EditTableComponent implements OnInit{
   }
 
   addRow(): void{
-    this.passportsWrap.addPassports([new Passport('xxx', 0)]);
+    this.passportsWrap.addPassports([new Passport('xxx', '0')]);
     this.sendPassports();
   }
 
@@ -40,8 +40,8 @@ export class EditTableComponent implements OnInit{
       return;
     }
 
-    const newPassports = this.passportsWrap.getPassports();
-    const tempPassport: Passport = this.passportsWrap.getPassports()[index];
+    const newPassports = this.passportsWrap.getPassports(); // current row
+    const tempPassport: Passport = this.passportsWrap.getPassports()[index]; // new array
     newPassports.splice(index, 1);
     newPassports.splice(index - 1, 0, tempPassport);
     this.passportsWrap.setPassports(newPassports);
