@@ -64,15 +64,13 @@
     <thead>
     <tr>
       <th scope="col">#</th>
-      <th scope="col">Name</th>
-      <th scope="col">Year</th>
+      <th scope="col" *ngFor="let col of passportsHandlerService.getColumns()">{{col}}</th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let passport of passportsWrap.getPassports(); let i = index">
+    <tr *ngFor="let row of passportsHandlerService.getPassports(); let i = index">
       <th scope="row">{{i+1}}</th>
-      <td>{{passport.name}}</td>
-      <td>{{passport.year}}</td>
+      <td *ngFor="let col of passportsHandlerService.getColumns()">{{row.get(col)}}</td>
     </tr>
     </tbody>
   </table>

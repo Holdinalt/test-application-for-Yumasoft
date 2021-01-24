@@ -3,29 +3,25 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Name</th>
-          <th scope="col">Year</th>
+          <th scope="col" *ngFor="let col of passportsHandlerService.getColumns()">{{col}}</th>
           <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let passport of this.passportsWrap.getPassports(); let i = index">
+        <tr *ngFor="let row of passportsHandlerService.getPassports(); let i = index">
           <th scope="row">{{i+1}}</th>
-          <td><input type="text" class="form-control"
-                     name="nameField{{i}}" [(ngModel)]="this.passportsWrap.getPassports()[i].name"
-                     placeholder='{{passport.name}}' (change)="sendPassports()">
+          <td *ngFor="let col of passportsHandlerService.getColumns(); let j = index">
+            <input type="text" class="form-control"
+                     name="nameField{{j}}" [value]="row.get(col)"
+                     (change)="updateInfo(i, col, $event)">
           </td>
-          <td><input type="text" class="form-control"
-                     id="yearField{{i}}"
-                     name="yearField" [(ngModel)]="this.passportsWrap.getPassports()[i].year"
-                     placeholder='{{passport.year}}' (change)="sendPassports()"></td>
           <td>
             <button type="button" class="btn btn-primary"
-                      (click)="deleteRow(i)">Delete</button>
+                      (click)="passportsHandlerService.deletePassport(i)">Delete</button>
             <button type="button" class="btn btn-primary"
-                    (click)="upRow(i)">/\</button>
+                    (click)="passportsHandlerService.upRow(i)">/\</button>
             <button type="button" class="btn btn-primary"
-                    (click)="downRow(i)">\/</button>
+                    (click)="passportsHandlerService.downRow(i)">\/</button>
           </td>
         </tr>
 
@@ -36,7 +32,6 @@
           </td>
           <td colspan="3"></td>
         </tr>
-
         </tbody>
       </table>
 
