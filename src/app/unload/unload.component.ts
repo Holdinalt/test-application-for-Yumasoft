@@ -1,9 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {PassportsHandlerService} from '../passports-handler.service';
 import { saveAs } from 'file-saver';
-import {PassportsWrap} from '../models/PassportsWrap';
-
-
 
 
 @Component({
@@ -17,20 +14,25 @@ export class UnloadComponent implements OnInit{
   passportsJSON: string;
   passportsCSV: string;
 
+  separatorCSV = ',';
+
   constructor(private passportsHandlerService: PassportsHandlerService) {
   }
 
-  ngOnInit(): void { // TODO
-    // this.passportsWrap.setPassports(this.passportHandlerService.getPassports());
-    // this.passportsWrap.setPassports(this.passportsWrap.getPassports());
-    //
+  setSeparator(separator: string): void{
+    this.separatorCSV = separator;
+    this.passportsCSV = this.passportsHandlerService.getPassportsCSV(this.separatorCSV);
+  }
+
+
+  ngOnInit(): void {
     if (this.passportsHandlerService.getPassports() === []){
       this.passportsJSON = '[]';
       this.passportsCSV = '';
     } else {
 
       this.passportsJSON = this.passportsHandlerService.getPassportsJSON();
-    //   this.passportsCSV = this.passportsWrap.getPassportsCSV(',');
+      this.passportsCSV = this.passportsHandlerService.getPassportsCSV(this.separatorCSV);
     }
   }
 

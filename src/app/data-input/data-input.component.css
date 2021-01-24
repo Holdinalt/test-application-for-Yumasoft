@@ -10,6 +10,16 @@ textarea{
   padding: 1rem;
 }
 
+.separator{
+  font-size: 150%;
+  margin-right: 0.5rem;
+}
+
+.separatorInput{
+  margin-top: -1rem;
+  margin-bottom: 0.5rem;
+}
+
 @media screen and (max-width: 992px) {
   .file-input{
     padding: 1rem;

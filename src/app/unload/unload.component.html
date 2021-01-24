@@ -14,6 +14,22 @@
                 name="dataCSVOutput" [value]="passportsCSV">
     </textarea>
 
+      <div class="row col-sm-12 separatorInput">
+        <div class="col-sm-2"><span>Choose separator:</span></div>
+        <div class="col-sm-2">
+          <label for="radio_," class="separator">,</label>
+          <input type="radio" id="radio_," name="separator" (change)="setSeparator(',')" checked>
+        </div>
+        <div class="col-sm-2">
+          <label for="radio_;" class="separator">;</label>
+          <input type="radio" id="radio_;" name="separator" (change)="setSeparator(';')">
+        </div>
+        <div class="col-sm-3">
+          <label for="radio_#" class="separator" >#</label>
+          <input type="radio" id="radio_#" name="separator" (change)="setSeparator('#')">
+        </div>
+      </div>
+
       <button class="downloadButton" (click)="save(passportsCSV, 'csv')">Download CSV</button>
     </div>
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {PassportsHandlerService} from '../passports-handler.service';
 
 @Component({
@@ -7,10 +7,13 @@ import {PassportsHandlerService} from '../passports-handler.service';
   styleUrls: ['data-input.component.css']
 })
 
-export class DataInputComponent implements OnInit{
+export class DataInputComponent{
 
   inputJSONLine: string;
   inputCSVLine: string;
+
+  separatorCSV = ',';
+  exampleOfCSV = 'Example:\nName,Year\ndan,2000';
 
   JSONUploadFile: File = null;
   CSVUploadFile: File = null;
@@ -19,13 +22,10 @@ export class DataInputComponent implements OnInit{
 
   }
 
-
-  ngOnInit(): void {
-    /*this.passportHandlerService
-    this.table = this.wrap.getTable();
-    this.createRowTable(this.table);*/
+  setSeparator(separator: string): void{
+    this.separatorCSV = separator;
+    this.exampleOfCSV = 'Example:\nName' + separator + 'Year\ndan' + separator + '2000';
   }
-
 
   addJSONInfo(): void{
     this.passportsHandlerService.addPassportsFromJSON(this.inputJSONLine);
@@ -37,15 +37,14 @@ export class DataInputComponent implements OnInit{
     }
   }
 
-  addCSVInfo(separator: string): void{ //TODO
-  //
-  //   try{
-  //     this.passportsWrap.addPassportsFromCSV(this.inputCSVLine, separator);
-  //     this.hideError('inputCSVData');
-  //   } catch (e){
-  //     this.showError('inputCSVData');
-  //   }
-  //   this.sendPassports();
+  addCSVInfo(): void{
+    this.passportsHandlerService.addPassportsFromCSV(this.inputCSVLine, this.separatorCSV);
+    try{
+
+      this.hideError('inputCSVData');
+    } catch (e){
+      this.showError('inputCSVData');
+    }
   }
 
   showError(target: string): void {
@@ -60,30 +59,28 @@ export class DataInputComponent implements OnInit{
   }
 
 
-  inputJSONFile(files: FileList): void { //TODO
-  //   this.JSONUploadFile = files.item(0);
-  //   const reader = new FileReader();
-  //
-  //   reader.onload = () => {
-  //     console.log(reader.result);
-  //     this.passportsWrap.addPassportsFromJSON(reader.result.toString());
-  //     this.sendPassports();
-  //   };
-  //
-  //   reader.readAsText(this.JSONUploadFile);
+  inputJSONFile(files: FileList): void {
+     this.JSONUploadFile = files.item(0);
+     const reader = new FileReader();
+
+     reader.onload = () => {
+       console.log(reader.result);
+       this.passportsHandlerService.addPassportsFromJSON(reader.result.toString());
+     };
+
+     reader.readAsText(this.JSONUploadFile);
   }
 
-  inputCSVFile(files: FileList): void { //TODO
-  //   this.CSVUploadFile = files.item(0);
-  //   const reader = new FileReader();
-  //
-  //   reader.onload = () => {
-  //     console.log(reader.result);
-  //     this.passportsWrap.addPassportsFromCSV(reader.result.toString(), ',');
-  //     this.sendPassports();
-  //   };
-  //
-  //   reader.readAsText(this.CSVUploadFile);
+  inputCSVFile(files: FileList): void {
+    this.CSVUploadFile = files.item(0);
+    const reader = new FileReader();
+
+    reader.onload = () => {
+      console.log(reader.result);
+      this.passportsHandlerService.addPassportsFromCSV(reader.result.toString(), this.separatorCSV);
+    };
+
+    reader.readAsText(this.CSVUploadFile);
   }
 
 }

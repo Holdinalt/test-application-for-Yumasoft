@@ -2,6 +2,16 @@ textarea{
   height: 12rem;
 }
 
+.separator{
+  font-size: 150%;
+  margin-right: 0.5rem;
+}
+
+.separatorInput{
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
 .form-group{
   padding-left: 1rem;
   padding-top: 1rem;
