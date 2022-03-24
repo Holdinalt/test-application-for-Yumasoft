@@ -63,11 +63,11 @@ export class TableHandlerService {
       return '[]';
     }
     let out = '';
-    for (const passport of this.rows){
+    for (const row of this.rows){
       if (out === ''){
-        out = '[' + passport.getJSON();
+        out = '[' + row.getJSON();
       }else {
-        out += ',' + passport.getJSON();
+        out += ',' + row.getJSON();
       }
     }
     out += ']';
@@ -87,8 +87,8 @@ export class TableHandlerService {
       }
 
     }
-    for (const passport of this.rows){
-        out += '\n' + passport.getCSV(separator, this.columns);
+    for (const row of this.rows){
+        out += '\n' + row.getCSV(separator, this.columns);
     }
     return out;
   }
@@ -129,16 +129,16 @@ export class TableHandlerService {
     if (index !== -1){
       this.columns.splice(index, 1);
     }
-    for (const passport of this.rows){
-      passport.delete(col);
+    for (const row of this.rows){
+      row.delete(col);
     }
   }
 
   makeColumns(): void{
     let cols: string[] = [];
-    for (const passport of this.rows){
+    for (const row of this.rows){
 
-      for (let key of passport.getColumns()){ // создаем столбцы
+      for (let key of row.getColumns()){ // создаем столбцы
 
         key = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 
