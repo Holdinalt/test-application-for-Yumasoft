@@ -1,4 +1,4 @@
-export class Passport{
+export class Row {
 
   map = new Map<string, string>();
 
@@ -6,7 +6,7 @@ export class Passport{
     this.map = map;
   }
 
-  getKeys(): string[]{ // Достать и переложить ключи в массив
+  getColumns(): string[]{ // Достать и переложить ключи в массив
     let out: string[] = [];
     for (const key of this.map.keys()){
       if (out === []){
@@ -53,14 +53,23 @@ export class Passport{
   }
 
   getCSV(separator: string, columns: string[]): string{
-    let out = '';
-    for (const col of columns){
-      if (out === ''){
-        out = this.get(col);
+    let out: string;
+    for (let i = 0; i < columns.length; i++){
+      if (i === 0){
+        out = this.get(columns[i]);
       }else {
-        out += separator + this.get(col);
+        out += separator + this.get(columns[i]);
       }
     }
+
+
+    // for (const col of columns){
+    //   if (out === ''){
+    //     out = this.get(col);
+    //   }else {
+    //     out += separator + this.get(col);
+    //   }
+    // }
     return out;
   }
 }

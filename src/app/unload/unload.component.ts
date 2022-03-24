@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PassportsHandlerService} from '../passports-handler.service';
+import {TableHandlerService} from '../Table-handler.service';
 import { saveAs } from 'file-saver';
 
 
@@ -16,7 +16,7 @@ export class UnloadComponent implements OnInit{
 
   separatorCSV = ',';
 
-  constructor(private passportsHandlerService: PassportsHandlerService) {
+  constructor(private passportsHandlerService: TableHandlerService) {
   }
 
   setSeparator(separator: string): void{
@@ -26,7 +26,7 @@ export class UnloadComponent implements OnInit{
 
 
   ngOnInit(): void {
-    if (this.passportsHandlerService.getPassports() === []){
+    if (this.passportsHandlerService.getRows() === []){
       this.passportsJSON = '[]';
       this.passportsCSV = '';
     } else {

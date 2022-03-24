@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {PassportsHandlerService} from '../passports-handler.service';
+import {TableHandlerService} from '../Table-handler.service';
 
 @Component({
   selector: 'app-table-data-input',
@@ -18,7 +18,7 @@ export class DataInputComponent{
   JSONUploadFile: File = null;
   CSVUploadFile: File = null;
 
-  constructor(public passportsHandlerService: PassportsHandlerService) {
+  constructor(public passportsHandlerService: TableHandlerService) {
 
   }
 

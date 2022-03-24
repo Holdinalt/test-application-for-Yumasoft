@@ -1,10 +1,10 @@
 import {Injectable} from '@angular/core';
-import {Passport} from './models/Passport';
+import {Row} from './models/Row';
 
 @Injectable()
-export class PassportsHandlerService {
+export class TableHandlerService {
 
-  private passports: Passport[] = [];
+  private passports: Row[] = [];
 
   columns: string[];
 
@@ -12,7 +12,7 @@ export class PassportsHandlerService {
     return this.columns;
   }
 
-  getPassports(): Passport[] {
+  getRows(): Row[] {
     return this.passports;
   }
 
@@ -108,14 +108,14 @@ export class PassportsHandlerService {
 
   addInfo(map: Map<string, string>): void{
     if (this.passports === []){
-      this.passports = [new Passport(map)];
+      this.passports = [new Row(map)];
     }else{
 
-      this.passports.push(new Passport(map));
+      this.passports.push(new Row(map));
     }
   }
 
-  addRow(passport: Passport): void{
+  addRow(passport: Row): void{
     if (this.passports === []){
       this.passports = [passport];
     }else {
@@ -138,7 +138,7 @@ export class PassportsHandlerService {
     let cols: string[] = [];
     for (const passport of this.passports){
 
-      for (let key of passport.getKeys()){ // создаем столбцы
+      for (let key of passport.getColumns()){ // создаем столбцы
 
         key = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
 
@@ -167,7 +167,7 @@ export class PassportsHandlerService {
       return;
     }
     const newPassports = this.passports; // current row
-    const tempPassport: Passport = this.passports[index]; // new array
+    const tempPassport: Row = this.passports[index]; // new array
     newPassports.splice(index, 1);
     newPassports.splice(index - 1, 0, tempPassport);
     this.passports = newPassports;
@@ -180,7 +180,7 @@ export class PassportsHandlerService {
     }
 
     const newPassports = this.passports;
-    const tempPassport: Passport = this.passports[index];
+    const tempPassport: Row = this.passports[index];
     newPassports.splice(index, 1);
     newPassports.splice(index + 1, 0, tempPassport);
     this.passports = newPassports;
@@ -192,7 +192,7 @@ export class PassportsHandlerService {
 
 
 
-  // getPassports(): Passport[]{
+  // getPassports(): Row[]{
   //   if ( sessionStorage.getItem('passports') === ''){
   //     return [];
   //   }
@@ -200,7 +200,7 @@ export class PassportsHandlerService {
   //   return JSON.parse(sessionStorage.getItem('passports'));
   // }
   //
-  // setPassports(passports: Passport[]): void{
+  // setPassports(passports: Row[]): void{
   //   sessionStorage.setItem('passports',  JSON.stringify(passports));
   // }
 

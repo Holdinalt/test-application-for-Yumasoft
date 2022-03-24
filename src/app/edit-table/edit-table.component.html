@@ -8,7 +8,7 @@
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let row of passportsHandlerService.getPassports(); let i = index">
+        <tr *ngFor="let row of passportsHandlerService.getRows(); let i = index">
           <th scope="row">{{i+1}}</th>
           <td *ngFor="let col of passportsHandlerService.getColumns(); let j = index">
             <input type="text" class="form-control"

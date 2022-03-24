@@ -2,7 +2,7 @@ import {NgModule} from '@angular/core';
 import {DataInputComponent} from './data-input.component';
 
 import {FormsModule} from '@angular/forms';
-import {PassportsHandlerService} from '../passports-handler.service';
+import {TableHandlerService} from '../Table-handler.service';
 import {BrowserModule} from '@angular/platform-browser';
 
 @NgModule({
@@ -12,7 +12,7 @@ import {BrowserModule} from '@angular/platform-browser';
   ],
 
     imports: [FormsModule, BrowserModule],
-  providers: [PassportsHandlerService]
+  providers: [TableHandlerService]
 })
 
 export class DataInputModule {}

@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {EditTableComponent} from './edit-table.component';
 import {FormsModule} from '@angular/forms';
 import {BrowserModule} from '@angular/platform-browser';
-import {PassportsHandlerService} from '../passports-handler.service';
+import {TableHandlerService} from '../Table-handler.service';
 
 @NgModule({
   imports: [FormsModule, BrowserModule],
@@ -11,7 +11,7 @@ import {PassportsHandlerService} from '../passports-handler.service';
   exports: [
     EditTableComponent,
   ],
-  providers: [PassportsHandlerService]
+  providers: [TableHandlerService]
 })
 
 export class EditTableModule {}

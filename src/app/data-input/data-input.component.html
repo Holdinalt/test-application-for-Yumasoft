@@ -87,7 +87,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let row of passportsHandlerService.getPassports(); let i = index">
+    <tr *ngFor="let row of passportsHandlerService.getRows(); let i = index">
       <th scope="row">{{i+1}}</th>
       <td *ngFor="let col of passportsHandlerService.getColumns()">{{row.get(col)}}</td>
     </tr>

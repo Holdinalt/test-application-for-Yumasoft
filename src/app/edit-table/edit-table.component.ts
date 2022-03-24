@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {Passport} from '../models/Passport';
-import {PassportsHandlerService} from '../passports-handler.service';
+import {Row} from '../models/Row';
+import {TableHandlerService} from '../Table-handler.service';
 
 
 @Component({
@@ -14,7 +14,7 @@ export class EditTableComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  constructor(public passportsHandlerService: PassportsHandlerService) {
+  constructor(public passportsHandlerService: TableHandlerService) {
 
   }
 
@@ -23,7 +23,7 @@ export class EditTableComponent implements OnInit{
   }
 
   addRow(): void{
-    this.passportsHandlerService.addRow(new Passport(new Map<string, string>()));
+    this.passportsHandlerService.addRow(new Row(new Map<string, string>()));
   }
 
 
