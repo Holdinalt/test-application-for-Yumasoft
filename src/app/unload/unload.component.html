@@ -3,15 +3,15 @@
     <div class="form-group">
       <label for="dataJSON">JSON</label>
       <textarea class="form-control" id="dataJSON"
-                name="dataJSONOutput" [value]="passportsJSON">
+                name="dataJSONOutput" [value]="rowsJSON">
     </textarea>
 
-      <button class="downloadButton" (click)="save(passportsJSON, 'json')">Download JSON</button>
+      <button class="downloadButton" (click)="save(rowsJSON, 'json')">Download JSON</button>
     </div>
     <div class="form-group">
       <label for="dataCSV">CSV</label>
       <textarea class="form-control" id="dataCSV"
-                name="dataCSVOutput" [value]="passportsCSV">
+                name="dataCSVOutput" [value]="rowsCSV">
     </textarea>
 
       <div class="row col-sm-12 separatorInput">
@@ -30,7 +30,7 @@
         </div>
       </div>
 
-      <button class="downloadButton" (click)="save(passportsCSV, 'csv')">Download CSV</button>
+      <button class="downloadButton" (click)="save(rowsCSV, 'csv')">Download CSV</button>
     </div>
 
   </form>

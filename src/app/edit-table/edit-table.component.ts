@@ -14,16 +14,16 @@ export class EditTableComponent implements OnInit{
   ngOnInit(): void {
   }
 
-  constructor(public passportsHandlerService: TableHandlerService) {
+  constructor(public tableHandlerService: TableHandlerService) {
 
   }
 
   updateInfo(row: number, col: string, event: any): void{
-    this.passportsHandlerService.changeInfo(row, col, event.target.value);
+    this.tableHandlerService.changeInfo(row, col, event.target.value);
   }
 
   addRow(): void{
-    this.passportsHandlerService.addRow(new Row(new Map<string, string>()));
+    this.tableHandlerService.addRow(new Row(new Map<string, string>()));
   }
 
 

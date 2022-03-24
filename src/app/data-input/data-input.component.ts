@@ -18,7 +18,7 @@ export class DataInputComponent{
   JSONUploadFile: File = null;
   CSVUploadFile: File = null;
 
-  constructor(public passportsHandlerService: TableHandlerService) {
+  constructor(public tableHandlerService: TableHandlerService) {
 
   }
 
@@ -28,7 +28,7 @@ export class DataInputComponent{
   }
 
   addJSONInfo(): void{
-    this.passportsHandlerService.addPassportsFromJSON(this.inputJSONLine);
+    this.tableHandlerService.addRowsFromJSON(this.inputJSONLine);
     try{
 
       this.hideError('inputJSONData');
@@ -38,7 +38,7 @@ export class DataInputComponent{
   }
 
   addCSVInfo(): void{
-    this.passportsHandlerService.addPassportsFromCSV(this.inputCSVLine, this.separatorCSV);
+    this.tableHandlerService.addRowsFromCSV(this.inputCSVLine, this.separatorCSV);
     try{
 
       this.hideError('inputCSVData');
@@ -65,7 +65,7 @@ export class DataInputComponent{
 
      reader.onload = () => {
        console.log(reader.result);
-       this.passportsHandlerService.addPassportsFromJSON(reader.result.toString());
+       this.tableHandlerService.addRowsFromJSON(reader.result.toString());
      };
 
      reader.readAsText(this.JSONUploadFile);
@@ -77,7 +77,7 @@ export class DataInputComponent{
 
     reader.onload = () => {
       console.log(reader.result);
-      this.passportsHandlerService.addPassportsFromCSV(reader.result.toString(), this.separatorCSV);
+      this.tableHandlerService.addRowsFromCSV(reader.result.toString(), this.separatorCSV);
     };
 
     reader.readAsText(this.CSVUploadFile);

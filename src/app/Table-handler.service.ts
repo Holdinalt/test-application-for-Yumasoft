@@ -4,7 +4,7 @@ import {Row} from './models/Row';
 @Injectable()
 export class TableHandlerService {
 
-  private passports: Row[] = [];
+  private rows: Row[] = [];
 
   columns: string[];
 
@@ -13,11 +13,11 @@ export class TableHandlerService {
   }
 
   getRows(): Row[] {
-    return this.passports;
+    return this.rows;
   }
 
 
-  addPassportsFromJSON(json: string): void {
+  addRowsFromJSON(json: string): void {
     const objects = JSON.parse(json);
     for (const obj of objects) {
       const newMap = new Map();
@@ -30,7 +30,7 @@ export class TableHandlerService {
     this.makeColumns();
   }
 
-  addPassportsFromCSV(csv: string, separator: string): void {
+  addRowsFromCSV(csv: string, separator: string): void {
     const rawRows = csv.split('\n');
     let cols: string[] = [];
 
@@ -58,12 +58,12 @@ export class TableHandlerService {
     this.makeColumns();
   }
 
-  getPassportsJSON(): string{
-    if (this.passports.length === 0){
+  getRowsJSON(): string{
+    if (this.rows.length === 0){
       return '[]';
     }
     let out = '';
-    for (const passport of this.passports){
+    for (const passport of this.rows){
       if (out === ''){
         out = '[' + passport.getJSON();
       }else {
@@ -74,8 +74,8 @@ export class TableHandlerService {
     return out;
   }
 
-  getPassportsCSV(separator: string): string {
-    if (this.passports.length === 0){
+  getRowsCSV(separator: string): string {
+    if (this.rows.length === 0){
       return '';
     }
     let out = '';
@@ -87,7 +87,7 @@ export class TableHandlerService {
       }
 
     }
-    for (const passport of this.passports){
+    for (const passport of this.rows){
         out += '\n' + passport.getCSV(separator, this.columns);
     }
     return out;
@@ -97,29 +97,29 @@ export class TableHandlerService {
 
 
   deletePassport(index: number): void {
-    this.passports.splice(index, 1);
+    this.rows.splice(index, 1);
     this.makeColumns();
   }
 
   changeInfo(row: number, col: string, val: string): void{
-    this.passports[row].set(col, val);
+    this.rows[row].set(col, val);
     this.makeColumns();
   }
 
   addInfo(map: Map<string, string>): void{
-    if (this.passports === []){
-      this.passports = [new Row(map)];
+    if (this.rows === []){
+      this.rows = [new Row(map)];
     }else{
 
-      this.passports.push(new Row(map));
+      this.rows.push(new Row(map));
     }
   }
 
-  addRow(passport: Row): void{
-    if (this.passports === []){
-      this.passports = [passport];
+  addRow(row: Row): void{
+    if (this.rows === []){
+      this.rows = [row];
     }else {
-      this.passports.push(passport);
+      this.rows.push(row);
       this.makeColumns();
     }
   }
@@ -129,14 +129,14 @@ export class TableHandlerService {
     if (index !== -1){
       this.columns.splice(index, 1);
     }
-    for (const passport of this.passports){
+    for (const passport of this.rows){
       passport.delete(col);
     }
   }
 
   makeColumns(): void{
     let cols: string[] = [];
-    for (const passport of this.passports){
+    for (const passport of this.rows){
 
       for (let key of passport.getColumns()){ // создаем столбцы
 
@@ -166,24 +166,24 @@ export class TableHandlerService {
     if (index === 0){
       return;
     }
-    const newPassports = this.passports; // current row
-    const tempPassport: Row = this.passports[index]; // new array
-    newPassports.splice(index, 1);
-    newPassports.splice(index - 1, 0, tempPassport);
-    this.passports = newPassports;
+    const newRows = this.rows; // current row
+    const tempPassport: Row = this.rows[index]; // new array
+    newRows.splice(index, 1);
+    newRows.splice(index - 1, 0, tempPassport);
+    this.rows = newRows;
   }
 
 
   downRow(index: number): void{
-    if (index === this.passports.length){
+    if (index === this.rows.length){
       return;
     }
 
-    const newPassports = this.passports;
-    const tempPassport: Row = this.passports[index];
-    newPassports.splice(index, 1);
-    newPassports.splice(index + 1, 0, tempPassport);
-    this.passports = newPassports;
+    const newRow = this.rows;
+    const tempPassport: Row = this.rows[index];
+    newRow.splice(index, 1);
+    newRow.splice(index + 1, 0, tempPassport);
+    this.rows = newRow;
   }
 
 

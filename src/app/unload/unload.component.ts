@@ -11,35 +11,35 @@ import { saveAs } from 'file-saver';
 
 export class UnloadComponent implements OnInit{
 
-  passportsJSON: string;
-  passportsCSV: string;
+  rowsJSON: string;
+  rowsCSV: string;
 
   separatorCSV = ',';
 
-  constructor(private passportsHandlerService: TableHandlerService) {
+  constructor(private tableHandlerService: TableHandlerService) {
   }
 
   setSeparator(separator: string): void{
     this.separatorCSV = separator;
-    this.passportsCSV = this.passportsHandlerService.getPassportsCSV(this.separatorCSV);
+    this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV);
   }
 
 
   ngOnInit(): void {
-    if (this.passportsHandlerService.getRows() === []){
-      this.passportsJSON = '[]';
-      this.passportsCSV = '';
+    if (this.tableHandlerService.getRows() === []){
+      this.rowsJSON = '[]';
+      this.rowsCSV = '';
     } else {
 
-      this.passportsJSON = this.passportsHandlerService.getPassportsJSON();
-      this.passportsCSV = this.passportsHandlerService.getPassportsCSV(this.separatorCSV);
+      this.rowsJSON = this.tableHandlerService.getRowsJSON();
+      this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV);
     }
   }
 
 
-  save(passports: string, type: string): void{
-    const blob = new Blob([passports]);
-    saveAs(blob, 'passports.' + type);
+  save(rows: string, type: string): void{
+    const blob = new Blob([rows]);
+    saveAs(blob, 'data.' + type);
   }
 
 

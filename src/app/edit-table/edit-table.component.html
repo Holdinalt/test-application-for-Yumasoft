@@ -3,25 +3,25 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col" *ngFor="let col of passportsHandlerService.getColumns()">{{col}}</th>
+          <th scope="col" *ngFor="let col of tableHandlerService.getColumns()">{{col}}</th>
           <th scope="col"></th>
         </tr>
         </thead>
         <tbody>
-        <tr *ngFor="let row of passportsHandlerService.getRows(); let i = index">
+        <tr *ngFor="let row of tableHandlerService.getRows(); let i = index">
           <th scope="row">{{i+1}}</th>
-          <td *ngFor="let col of passportsHandlerService.getColumns(); let j = index">
+          <td *ngFor="let col of tableHandlerService.getColumns(); let j = index">
             <input type="text" class="form-control"
                      name="nameField{{j}}" [value]="row.get(col)"
                      (change)="updateInfo(i, col, $event)">
           </td>
           <td>
             <button type="button" class="btn btn-primary"
-                      (click)="passportsHandlerService.deletePassport(i)">Delete</button>
+                      (click)="tableHandlerService.deletePassport(i)">Delete</button>
             <button type="button" class="btn btn-primary"
-                    (click)="passportsHandlerService.upRow(i)">/\</button>
+                    (click)="tableHandlerService.upRow(i)">/\</button>
             <button type="button" class="btn btn-primary"
-                    (click)="passportsHandlerService.downRow(i)">\/</button>
+                    (click)="tableHandlerService.downRow(i)">\/</button>
           </td>
         </tr>
 
