@@ -1,3 +1,5 @@
+import {map} from 'rxjs/operators';
+
 export class Row {
 
   map = new Map<string, string>();
@@ -71,5 +73,14 @@ export class Row {
     //   }
     // }
     return out;
+  }
+
+  changeColumnName(oldName: string, newName: string): void{
+    if (!this.map.has(oldName)){
+      return;
+    }
+    const temp = this.map.get(oldName);
+    this.map.delete(oldName);
+    this.map.set(newName, temp);
   }
 }

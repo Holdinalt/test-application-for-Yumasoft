@@ -3,7 +3,11 @@
         <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col" *ngFor="let col of tableHandlerService.getColumns()">{{col}}</th>
+          <th scope="col" *ngFor="let col of tableHandlerService.getColumns(); let i = index">
+            <input type="text" class="form-control"
+                   name="nameFieldId{{i}}" [value]="col" id="nameFieldId{{i}}"
+                   (change)="changeColumnName(i, $event)">
+          </th>
           <th scope="col"></th>
         </tr>
         </thead>

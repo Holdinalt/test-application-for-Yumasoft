@@ -28,9 +28,8 @@ export class DataInputComponent{
   }
 
   addJSONInfo(): void{
-    this.tableHandlerService.addRowsFromJSON(this.inputJSONLine);
     try{
-
+      this.tableHandlerService.addRowsFromJSON(this.inputJSONLine);
       this.hideError('inputJSONData');
     } catch (e){
       this.showError('inputJSONData');
@@ -38,11 +37,11 @@ export class DataInputComponent{
   }
 
   addCSVInfo(): void{
-    this.tableHandlerService.addRowsFromCSV(this.inputCSVLine, this.separatorCSV);
     try{
-
+      this.tableHandlerService.addRowsFromCSV(this.inputCSVLine, this.separatorCSV);
       this.hideError('inputCSVData');
     } catch (e){
+      console.log(e);
       this.showError('inputCSVData');
     }
   }

@@ -34,6 +34,10 @@ export class TableHandlerService {
     const rawRows = csv.split('\n');
     let cols: string[] = [];
 
+    if (rawRows.length < 1){
+      throw new Error('Недостаточно информации');
+    }
+
     for (const col of rawRows[0].split(separator)) { // Set up columns
       if (cols.length === 0) {
         cols = [col.charAt(0).toUpperCase() + col.substr(1).toLowerCase()];
@@ -50,7 +54,22 @@ export class TableHandlerService {
       console.log(data);
       for (let i = 0; i < data.length; i++) {
         if (data[i] !== '') {
-          newMap.set(cols[i], data[i]);
+
+          if (cols[i] !== undefined){
+
+            newMap.set(cols[i], data[i]);
+
+          } else {
+
+            let tempNum = 0;
+            while (newMap.has('Col ' + tempNum)){
+              tempNum++;
+            }
+
+            newMap.set('Col ' + tempNum, data[i]);
+
+          }
+
         }
       }
       this.addInfo(newMap);
@@ -140,7 +159,11 @@ export class TableHandlerService {
 
       for (let key of row.getColumns()){ // создаем столбцы
 
-        key = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
+        if (key !== undefined){
+          key = key.charAt(0).toUpperCase() + key.substr(1).toLowerCase();
+        }
+
+
 
         if ((cols.indexOf(key) === -1)){
           if (cols === []){
@@ -186,22 +209,16 @@ export class TableHandlerService {
     this.rows = newRow;
   }
 
+  changeColumnName(oldName: string, newName: string): void{
 
+    if (this.columns.includes(newName)){
+      throw new Error('Такой столбец уже существует');
+    }
 
-
-
-
-
-  // getPassports(): Row[]{
-  //   if ( sessionStorage.getItem('passports') === ''){
-  //     return [];
-  //   }
-  //   // console.log(JSON.parse(sessionStorage.getItem('passports')));
-  //   return JSON.parse(sessionStorage.getItem('passports'));
-  // }
-  //
-  // setPassports(passports: Row[]): void{
-  //   sessionStorage.setItem('passports',  JSON.stringify(passports));
-  // }
+    for (const row of this.rows){
+      row.changeColumnName(oldName, newName);
+    }
+    this.makeColumns();
+  }
 
 }

@@ -26,6 +26,18 @@ export class EditTableComponent implements OnInit{
     this.tableHandlerService.addRow(new Row(new Map<string, string>()));
   }
 
+  changeColumnName(index: number, event: any): void{
+    try{
+      this.tableHandlerService.changeColumnName(this.tableHandlerService.getColumns()[index], event.target.value);
+    } catch (e){
+      this.showError(event.target.id);
+    }
+  }
 
+  showError(target: string): void {
+    const inputRef = document.getElementById(target);
+    inputRef.classList.add('alert', 'alert-danger');
+
+  }
 
 }
