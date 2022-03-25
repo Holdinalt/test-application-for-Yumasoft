@@ -2,13 +2,16 @@
       <table class="table table-striped" id="dataTable">
         <thead>
         <tr>
-          <th scope="col">#</th>
+          <th scope="col">Col</th>
           <th scope="col" *ngFor="let col of tableHandlerService.getColumns(); let i = index">
             <input type="text" class="form-control"
                    name="nameFieldId{{i}}" [value]="col" id="nameFieldId{{i}}"
                    (change)="changeColumnName(i, $event)">
           </th>
-          <th scope="col"></th>
+          <th scope="col">
+<!--            <button type="button" class="btn btn-primary"-->
+<!--                    (click)="tableHandlerService.addColumn('')">+</button>-->
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -21,7 +24,7 @@
           </td>
           <td>
             <button type="button" class="btn btn-primary"
-                      (click)="tableHandlerService.deletePassport(i)">Delete</button>
+                      (click)="tableHandlerService.deleteRow(i)">Delete</button>
             <button type="button" class="btn btn-primary"
                     (click)="tableHandlerService.upRow(i)">/\</button>
             <button type="button" class="btn btn-primary"

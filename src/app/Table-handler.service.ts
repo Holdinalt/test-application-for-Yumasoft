@@ -38,6 +38,10 @@ export class TableHandlerService {
       throw new Error('Недостаточно информации');
     }
 
+    while (rawRows[0].trim() === ''){
+      rawRows.splice(0, 1);
+    }
+
     for (const col of rawRows[0].split(separator)) { // Set up columns
       if (cols.length === 0) {
         cols = [col.charAt(0).toUpperCase() + col.substr(1).toLowerCase()];
@@ -49,6 +53,9 @@ export class TableHandlerService {
     rawRows.splice(0, 1); // getting true info
 
     for (const row of rawRows) {
+      if (row.trim() === ''){
+        continue;
+      }
       const newMap = new Map();
       const data = row.split(separator);
       console.log(data);
@@ -115,7 +122,7 @@ export class TableHandlerService {
 
 
 
-  deletePassport(index: number): void {
+  deleteRow(index: number): void {
     this.rows.splice(index, 1);
     this.makeColumns();
   }
@@ -190,9 +197,9 @@ export class TableHandlerService {
       return;
     }
     const newRows = this.rows; // current row
-    const tempPassport: Row = this.rows[index]; // new array
+    const tempRow: Row = this.rows[index]; // new array
     newRows.splice(index, 1);
-    newRows.splice(index - 1, 0, tempPassport);
+    newRows.splice(index - 1, 0, tempRow);
     this.rows = newRows;
   }
 
@@ -203,9 +210,9 @@ export class TableHandlerService {
     }
 
     const newRow = this.rows;
-    const tempPassport: Row = this.rows[index];
+    const tempRow: Row = this.rows[index];
     newRow.splice(index, 1);
-    newRow.splice(index + 1, 0, tempPassport);
+    newRow.splice(index + 1, 0, tempRow);
     this.rows = newRow;
   }
 
@@ -221,4 +228,7 @@ export class TableHandlerService {
     this.makeColumns();
   }
 
+  addColumn(newColumn: string): void{
+    this.columns = this.columns.concat([newColumn]);
+  }
 }
