@@ -21,7 +21,7 @@ export class UnloadComponent implements OnInit{
 
   setSeparator(separator: string): void{
     this.separatorCSV = separator;
-    this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV);
+    this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV, '\\');
   }
 
 
@@ -32,7 +32,7 @@ export class UnloadComponent implements OnInit{
     } else {
 
       this.rowsJSON = this.tableHandlerService.getRowsJSON();
-      this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV);
+      this.rowsCSV = this.tableHandlerService.getRowsCSV(this.separatorCSV, '\\');
     }
   }
 

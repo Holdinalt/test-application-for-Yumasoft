@@ -30,7 +30,7 @@ export class TableHandlerService {
     this.makeColumns();
   }
 
-  addRowsFromCSV(csv: string, separator: string): void {
+  addRowsFromCSV(csv: string, separator: string, shielding: string): void {
     const rawRows = csv.split('\n');
     let cols: string[] = [];
 
@@ -42,7 +42,7 @@ export class TableHandlerService {
       rawRows.splice(0, 1);
     }
 
-    for (const col of rawRows[0].split(separator)) { // Set up columns
+    for (const col of this.smartSplit(rawRows[0], separator, shielding)) { // Set up columns
       if (cols.length === 0) {
         cols = [col.charAt(0).toUpperCase() + col.substr(1).toLowerCase()];
       } else {
@@ -57,7 +57,7 @@ export class TableHandlerService {
         continue;
       }
       const newMap = new Map();
-      const data = row.split(separator);
+      const data = this.smartSplit(row, separator, shielding);
       console.log(data);
       for (let i = 0; i < data.length; i++) {
         if (data[i] !== '') {
@@ -100,21 +100,21 @@ export class TableHandlerService {
     return out;
   }
 
-  getRowsCSV(separator: string): string {
+  getRowsCSV(separator: string, shielding: string): string {
     if (this.rows.length === 0){
       return '';
     }
     let out = '';
     for (const col of this.columns){
       if (out === ''){
-        out = col;
+        out = col.replace(separator, shielding + separator);
       }else {
-        out += separator + col;
+        out += separator + col.replace(separator, shielding + separator);
       }
 
     }
     for (const row of this.rows){
-        out += '\n' + row.getCSV(separator, this.columns);
+        out += '\n' + row.getCSV(separator, this.columns, '\\');
     }
     return out;
   }
@@ -230,5 +230,21 @@ export class TableHandlerService {
 
   addColumn(newColumn: string): void{
     this.columns = this.columns.concat([newColumn]);
+  }
+
+  smartSplit(str: string, separator: string, shielding: string): string[]{
+    const out: string[] = [];
+
+    let lastIndex = 0;
+
+    for (let i = 0; i < str.length; i++){
+      if (str[i] === separator && str[i - 1] !== shielding){
+        out.push(str.slice(lastIndex, i).replace(shielding, ''));
+        lastIndex = i + 1;
+      }
+    }
+    out.push(str.slice(lastIndex, str.length).replace(shielding, ''));
+
+    return out;
   }
 }

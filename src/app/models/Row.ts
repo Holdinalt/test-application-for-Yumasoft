@@ -54,13 +54,13 @@ export class Row {
     return out;
   }
 
-  getCSV(separator: string, columns: string[]): string{
+  getCSV(separator: string, columns: string[], shielding: string): string{
     let out: string;
     for (let i = 0; i < columns.length; i++){
       if (i === 0){
-        out = this.get(columns[i]);
+        out = this.get(columns[i]).replace(separator, shielding + separator);
       }else {
-        out += separator + this.get(columns[i]);
+        out += separator + this.get(columns[i]).replace(separator, shielding + separator);
       }
     }
 

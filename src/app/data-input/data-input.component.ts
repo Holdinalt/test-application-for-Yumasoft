@@ -38,7 +38,7 @@ export class DataInputComponent{
 
   addCSVInfo(): void{
     try{
-      this.tableHandlerService.addRowsFromCSV(this.inputCSVLine, this.separatorCSV);
+      this.tableHandlerService.addRowsFromCSV(this.inputCSVLine, this.separatorCSV, '\\');
       this.hideError('inputCSVData');
     } catch (e){
       console.log(e);
@@ -76,7 +76,7 @@ export class DataInputComponent{
 
     reader.onload = () => {
       console.log(reader.result);
-      this.tableHandlerService.addRowsFromCSV(reader.result.toString(), this.separatorCSV);
+      this.tableHandlerService.addRowsFromCSV(reader.result.toString(), this.separatorCSV, '`');
     };
 
     reader.readAsText(this.CSVUploadFile);
